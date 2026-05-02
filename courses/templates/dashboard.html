@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <h2>Welcome {{ user.email }}</h2>
+    <p>3D Animation will load here</p>
+    <div id="canvas" style="width:100%;height:400px;background:#000;"></div>
+    <a href="{% url 'download_certificate' 1 %}" style="padding:10px 20px; background:#4CAF50; color:white; text-decoration:none; border-radius:5px;">Download Certificate</a>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 2, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(document.getElementById('canvas').clientWidth, 400);
+        document.getElementById('canvas').appendChild(renderer.domElement);
+        
+        const geometry = new THREE.BoxGeometry();
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        camera.position.z = 5;
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+    
+    <a href="/admin/">Go to Admin</a> | <a href="/accounts/logout/">Logout</a>
+</body>
+</html>
