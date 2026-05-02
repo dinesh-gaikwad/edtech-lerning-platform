@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ course.title }} - EdTech Platform</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #000; color: white; margin: 0; padding: 40px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        video { width: 100%; border-radius: 12px; margin: 20px 0; }
+        .btn { display: inline-block; padding: 12px 30px; background: #10b981; color: white; text-decoration: none; border-radius: 8px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ course.title }}</h1>
+        <p>{{ course.description }}</p>
+        <video controls>
+            <source src="{{ course.video_url }}" type="video/mp4">
+            Your browser does not support video.
+        </video>
+        <a href="{% url 'certificates:generate' course.id %}" class="btn">Download Certificate</a>
+    </div>
+</body>
+</html>
